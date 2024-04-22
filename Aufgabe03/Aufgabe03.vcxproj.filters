@@ -15,27 +15,27 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\Vorlagen\Versuch03\reversi.cpp">
+    <ClCompile Include="reversi.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Vorlagen\Versuch03\reversiKI.cpp">
+    <ClCompile Include="reversiKI.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Vorlagen\Versuch03\test.cpp">
+    <ClCompile Include="test.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="..\..\Vorlagen\Versuch03\reversiErgebnis.txt" />
+    <Text Include="reversiErgebnis.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\Vorlagen\Versuch03\reversiKI.h">
+    <ClInclude Include="reversiKI.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Vorlagen\Versuch03\test.h">
+    <ClInclude Include="test.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Vorlagen\Versuch03\config.h">
+    <ClInclude Include="config.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
