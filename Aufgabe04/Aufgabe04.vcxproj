@@ -127,11 +127,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\Vorlagen\Versuch04\main.cpp" />
-    <ClCompile Include="..\..\Vorlagen\Versuch04\Vektor.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="Vektor.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\Vorlagen\Versuch04\Vektor.h" />
+    <ClInclude Include="Vektor.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
