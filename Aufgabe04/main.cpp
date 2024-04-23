@@ -17,27 +17,40 @@ int main()
     double hoehe = AUGENHOEHE + PLATTFORMHOEHE;
     double sichtweite = 0.0;
     double sichtweitePrev = 0.0;
+    double winkelZumHorizont = 0.0;
+    int schritte = 0;
 
     // Position des Beobachters als Vektor
-    Vektor beobachterPosition(0.0, 0.0, ERDRADIUS + hoehe);
+    Vektor beobachterPosition(0.0, ERDRADIUS + hoehe, 0.0);
 
     do {
-        sichtweitePrev = sichtweite; // Speichern der vorherigen Schaetzung 
+        schritte++;
+        sichtweitePrev = sichtweite; // Speichere die vorherige Schätzung
 
-        // Berechnung der neuen Schaetzung
+        // Berechne die neue Sichtweite
         double neueHoehe = sichtweite + hoehe;
-        double neueEntfernung = sqrt(2 * ERDRADIUS * neueHoehe);
+        double neueEntfernung = sqrt(pow((ERDRADIUS + neueHoehe), 2) - pow(ERDRADIUS, 2));
 
-        // Horizont als Vektor
-        Vektor horizontPunkt(neueEntfernung, 0.0, ERDRADIUS);
+        // Erstelle den Vektor für den Horizontpunkt
+        Vektor horizontPunkt(neueEntfernung, ERDRADIUS, 0.0);
 
-        // Berechnet die Distanz zwischen dem Beobachter und dem Horizont
+        // Berechne die Distanz zwischen dem Beobachter und dem Horizontpunkt
         Vektor distanzVektor = horizontPunkt.sub(beobachterPosition);
         sichtweite = distanzVektor.laenge();
+        
+        /*distanzVektor.ausgabe();
+        std::cout << abs(sichtweite - sichtweitePrev) << std::endl;*/
+
+        winkelZumHorizont = acos(ERDRADIUS / (ERDRADIUS + hoehe));
 
     } while (abs(sichtweite - sichtweitePrev) > 0.0001);
 
-    std::cout << "Sichtweite zum Horizont: " << sichtweite << " km" << std::endl;
+    std::cout << "Sie koennen " << sichtweite << " Km weit sehen." << std::endl;
+    std::cout << "Sie sind " << hoehe << " Meter hoch." << std::endl;
+    std::cout << "Der Winkel betraegt " << winkelZumHorizont * 180 / 3.141561<< " Grad." << std::endl;
+    std::cout << "Anzahl Schritte: " << schritte << std::endl;
+
+
 
     return 0;
 
