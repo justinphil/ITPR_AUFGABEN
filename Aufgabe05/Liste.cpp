@@ -19,17 +19,17 @@ Liste::Liste(): front(nullptr), back(nullptr)
  */
 void Liste::pushBack(Student pData)
 {
-    ListenElement* neuesElement = new ListenElement(pData, nullptr);
+    ListenElement* newElement = new ListenElement(pData, nullptr);
 
-    if (front == nullptr)                                       // Liste leer?
+    if (empty())
     {
-        front = neuesElement;
-        back = neuesElement;
+        front = newElement;
+        back = newElement;
     }
     else
     {
-        back->setNext(neuesElement);
-        back = neuesElement;
+        back->setNext(newElement);
+        back = newElement;
     }
 }
 
@@ -40,18 +40,15 @@ void Liste::pushBack(Student pData)
  */
 void Liste::popFront()
 {
-    ListenElement* cursor = front;
-
-    if (front == back)                                       // Liste enthält nur ein Listenelement
+    if (!empty())
     {
-        delete front;                                        // Listenelement löschen
-        front = nullptr;
-        back = nullptr;
-    }
-    else
-    {
+        ListenElement* temp = front;
         front = front->getNext();
-        delete cursor;
+
+        if (front == nullptr)
+            back = nullptr;
+
+        delete temp;
     }
 }
 
