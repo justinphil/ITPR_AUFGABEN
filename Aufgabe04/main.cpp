@@ -12,43 +12,32 @@ const double ERDRADIUS = 6371.0; // Erdradius in Kilometern
 const double AUGENHOEHE = 1.7; // Augenhoehe in Metern
 const double PLATTFORMHOEHE = 555.7; // Plattformhoehe in Metern
 
+const double PI = 3.14159265;
+
 int main()
 {
-    double hoehe = AUGENHOEHE + PLATTFORMHOEHE;
-    double sichtweite = 0.0;
-    double sichtweitePrev = 0.0;
-    double winkelZumHorizont = 0.0;
-    int schritte = 0;
+    Vektor erde(0, ERDRADIUS, 0); // Stellt den Erdradius als Vektor dar
+    Vektor beobachter(0,ERDRADIUS + ((AUGENHOEHE + PLATTFORMHOEHE) / 1000 ), 0); // Stellt die Position des Beobachters als Vektor dar.
+    Vektor sicht = beobachter.sub(erde); // Stellt die Sichtweite dar. Differenz zwischen Erde und Beobachter
 
-    // Position des Beobachters als Vektor
-    Vektor beobachterPosition(0.0, ERDRADIUS + hoehe, 0.0);
+    double winkel = 0;
+    int iterationen = 0;
 
     do {
-        schritte++;
-        sichtweitePrev = sichtweite; // Speichere die vorherige Schätzung
+        winkel += 0.0000000000000001; // Winkel inkrementieren
+        erde.rotiereUmZ(winkel * PI * 180); // Rotation des Erdvektors
+        sicht = erde.sub(beobachter); // Berechnung der Sichtweite
+        iterationen++;
 
-        // Berechne die neue Sichtweite
-        double neueHoehe = sichtweite + hoehe;
-        double neueEntfernung = sqrt(pow((ERDRADIUS + neueHoehe), 2) - pow(ERDRADIUS, 2));
+    } while (erde.skalarProd(sicht) <= 0); // Solange bis die Vektoren orthogonal zueinander sind.
+    
+    double beta = beobachter.winkel(erde);
 
-        // Erstelle den Vektor für den Horizontpunkt
-        Vektor horizontPunkt(neueEntfernung, ERDRADIUS, 0.0);
-
-        // Berechne die Distanz zwischen dem Beobachter und dem Horizontpunkt
-        Vektor distanzVektor = horizontPunkt.sub(beobachterPosition);
-        sichtweite = distanzVektor.laenge();
-        
-        /*distanzVektor.ausgabe();
-        std::cout << abs(sichtweite - sichtweitePrev) << std::endl;*/
-
-        winkelZumHorizont = acos(ERDRADIUS / (ERDRADIUS + hoehe));
-
-    } while (abs(sichtweite - sichtweitePrev) > 0.0001);
-
-    std::cout << "Sie koennen " << sichtweite << " Km weit sehen." << std::endl;
-    std::cout << "Sie sind " << hoehe << " Meter hoch." << std::endl;
-    std::cout << "Der Winkel betraegt " << winkelZumHorizont * 180 / 3.141561<< " Grad." << std::endl;
-    std::cout << "Anzahl Schritte: " << schritte << std::endl;
+    //Ausgabe in die Konsole
+    std::cout << "Sie koennen " << sicht.laenge() << std::setprecision(4) <<" KM weit sehen." << std::endl;
+    std::cout << "Sie sind " << AUGENHOEHE+PLATTFORMHOEHE << std::setprecision(4) <<" Meter hoch." << std::endl;
+    std::cout << "Der Winkel betraegt " << beta << " Grad." << std::endl;
+    std::cout << "Anzahl Schritte: " << iterationen << std::endl;
 
 
 

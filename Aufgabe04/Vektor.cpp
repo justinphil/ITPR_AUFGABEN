@@ -51,13 +51,9 @@ double Vektor::skalarProd(const Vektor& input) const {
 * @brief Function returns the angle of the vector int relation to another
 */
 double Vektor::winkel(const Vektor& input) const {
-    
-    double sProduct = skalarProd(input);
-    double l1 = laenge();
-    double l2 = input.laenge();
-    double cosine = sProduct / (l1 / l2);
-    double winkelInRad = std::acos(cosine);
-    return winkelInRad * 180 / pi; // Umrechnung in Grad 
+    double cosine = (this->skalarProd(input)) / (this->laenge() * input.laenge());
+    double winkel = acos(cosine) * 180/pi; // Umrechnung in Grad 
+    return winkel; 
 }
 
 /*
@@ -65,17 +61,12 @@ double Vektor::winkel(const Vektor& input) const {
 */
 void Vektor::rotiereUmZ(const double rad)  
 {
-    double cosWinkel = std::cos(rad);
-    double sinWinkel = std::sin(rad);
 
-    double newX = x * cosWinkel - y * sinWinkel;
-    double newY = x * sinWinkel + y * cosWinkel;
-    double newZ = z;
+    double newX = x * cos(rad) - y * sin(rad);
+    double newY = x * sin(rad) + y * cos(rad);
 
     x = newX;
     y = newY;
-    z = newZ;
-
 }
 
 
