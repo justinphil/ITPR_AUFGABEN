@@ -12,15 +12,18 @@ class ListenElement
 private:
     Student data;
     ListenElement* next;
+    ListenElement* prev;
 
 public:
     ListenElement(Student pData, ListenElement* pNext);
 
     void setData(Student pData);
     void setNext(ListenElement* pNext);
+    void setPrev(ListenElement* pPrev);
 
     Student getData() const;
     ListenElement* getNext() const;
+    ListenElement* getPrev() const;
 };
 
 #endif

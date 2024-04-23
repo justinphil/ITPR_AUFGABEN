@@ -21,13 +21,14 @@ void Liste::pushBack(Student pData)
 {
     ListenElement* newElement = new ListenElement(pData, nullptr);
 
-    if (empty())
+    if (front == nullptr)
     {
         front = newElement;
         back = newElement;
     }
     else
     {
+        newElement->setPrev(back);
         back->setNext(newElement);
         back = newElement;
     }
@@ -40,14 +41,16 @@ void Liste::pushBack(Student pData)
  */
 void Liste::popFront()
 {
-    if (!empty())
+    ListenElement* temp = front;
+    if (front == back)
     {
-        ListenElement* temp = front;
+        delete front;
+        front = nullptr;
+        back = nullptr;
+    } else
+    {
         front = front->getNext();
-
-        if (front == nullptr)
-            back = nullptr;
-
+        front->setPrev(nullptr);
         delete temp;
     }
 }
