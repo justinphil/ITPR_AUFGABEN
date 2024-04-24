@@ -66,10 +66,32 @@ std::string Student::getAdresse() const
 /**
  * @brief Gibt alle Daten des Studenten in einer Zeile aus
  */
-void Student::ausgabe() const
+const std::ostream& operator<<(std::ostream os, const Student& student)
 {
-    std::cout << name << ", MatNr. " << matNr << ", geb. am "
-              << geburtstag << ", wohnhaft in " << adresse
-              << std::endl;
+    os  << student.getName() << ", MatNr. " << student.getMatNr() << ", geb. am " 
+        << student.getGeburtstag() << ", wohnhaft in " << student.getAdresse();
 }
 
+const bool Student::operator==(const Student& student)
+{
+    if(matNr == student.matNr)
+        return true;
+    else
+        return false;
+}
+
+const bool operator>(const Student& student1, const Student& student2)
+{
+    if(student1.getMatNr() > student2.getMatNr())
+        return true;
+    else
+        return false;
+}
+
+const bool operator<(const Student& student1, const Student& student2)
+{
+    if(student1.getMatNr() < student2.getMatNr())
+        return true;
+    else
+        return false;
+}

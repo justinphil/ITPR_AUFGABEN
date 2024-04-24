@@ -7,11 +7,19 @@
 
 #include <iostream>
 #include <string>
-#include <fstream>
 #include <vector>
+#include <algorithm>
 
 #include "Student.h"
 
+
+/**
+ * @brief Sortiert die Studenten nach der Matrikelnummer
+ * 
+ */
+void sortiereStudenten() {
+
+}
 
 /**
 * @brief Schreibt die Daten von Studenten in den FileStream
@@ -121,7 +129,7 @@ int main()
                     {
                         student = studentenListe.front();
                         std::cout << "Der folgende Student ist geloescht worden:" << std::endl;
-                        student.ausgabe();
+                        std::cout << student << std::endl;
                         studentenListe.erase(studentenListe.begin());
                     }
                     else
