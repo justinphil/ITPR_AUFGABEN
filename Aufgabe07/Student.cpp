@@ -3,6 +3,7 @@
 //////////////////////////////////////////////////////////////////////////////
 
 #include <iostream>
+#include <ostream>
 #include "Student.h"
 
 /**
@@ -66,10 +67,10 @@ std::string Student::getAdresse() const
 /**
  * @brief Gibt alle Daten des Studenten in einer Zeile aus
  */
-const std::ostream& operator<<(std::ostream os, const Student& student)
+std::ostream& operator<<(std::ostream& os, const Student& student)
 {
-    os  << student.getName() << ", MatNr. " << student.getMatNr() << ", geb. am " 
-        << student.getGeburtstag() << ", wohnhaft in " << student.getAdresse();
+    os << student.getName() << ", MatNr. " << student.getMatNr() << ", geb. am " 
+       << student.getGeburtstag() << ", wohnhaft in " << student.getAdresse();
 }
 
 const bool Student::operator==(const Student& student)

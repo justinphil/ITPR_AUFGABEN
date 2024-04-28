@@ -7,6 +7,7 @@
 
 #include <string>
 #include <iostream>
+#include <ostream>
 
 class Student
 {
@@ -17,7 +18,8 @@ public:
     std::string getName() const;
     std::string getGeburtstag() const;
     std::string getAdresse() const;
-    const friend std::ostream operator << (std::ostream& os, const Student& student);
+    friend std::ostream& operator<<(std::ostream& os, const Student& student);
+
     const bool operator == (const Student& student);
     const friend bool operator > (const Student& student1, const Student& student2);
     const friend bool operator < (const Student& student1, const Student& student2);
@@ -28,6 +30,7 @@ private:
     std::string name;
     std::string geburtstag;
     std::string adresse;
+
 };
 
 #endif

@@ -12,7 +12,7 @@
 
 #include "Student.h"
 
-
+std::ostream outputFile("studenten.txt");
 /**
  * @brief Sortiert die Studenten nach der Matrikelnummer
  * 
@@ -26,11 +26,8 @@ void sortiereStudenten() {
 * @param ausgabe outFileStream
 * @param student Student
 */
-void writeToFile(std::ofstream& ausgabe, const Student& student) {
-    ausgabe << student.getMatNr() << std::endl;
-    ausgabe << student.getName() << std::endl;
-    ausgabe << student.getGeburtstag() << std::endl;
-    ausgabe << student.getAdresse() << std::endl;
+void writeToFile(std::ostream& ausgabe, const Student& student) {
+    ausgabe << student << std::endl;
 }
 /**
 * @brief Speichert den Vektor Studentenliste 
@@ -38,7 +35,7 @@ void writeToFile(std::ofstream& ausgabe, const Student& student) {
 * @param studentenListe Vektor 
 */
 void saveToFile(const std::string dateiName, const std::vector<Student>& studentenListe) {
-    std::ofstream outputFile(dateiName);
+    outputfile.open(dateiName);
     if (!outputFile) {
         std::cerr << "Fehler beim Öffnen der Datei '" << dateiName << "'." << std::endl;
         return;
@@ -146,7 +143,7 @@ int main()
                     {
                         std::cout << "Inhalt der Liste in fortlaufender Reihenfolge:" << std::endl;
                         for(const auto &student : studentenListe) {
-                            student.ausgabe();
+                            std::cout << student;
                         }
                     }
                     else
@@ -163,7 +160,7 @@ int main()
                     {
                         std::cout << "Inhalt der Liste in fortlaufender Reihenfolge:" << std::endl;
                         for (auto student = studentenListe.rbegin(); student != studentenListe.rend(); student++)
-                            student->ausgabe();
+                            std::cout << student;
                         
                     }
                     else
@@ -243,7 +240,7 @@ int main()
                     std::cout << "Geben Sie den Namen der Datei ein (ohne Dateiendung): " << std::endl;
                     std::getline(std::cin, dateiName);
 
-                    std::ifstream datei(dateiName + ".txt");
+                    std::fstream datei(dateiName + ".txt");
 
                     // Datei oeffnen
                     if (datei.is_open()) {
