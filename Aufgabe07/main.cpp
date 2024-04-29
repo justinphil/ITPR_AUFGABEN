@@ -17,7 +17,22 @@
  * @brief Sortiert die Studenten nach der Matrikelnummer
  * 
  */
-void sortiereStudenten() {
+void sortiereStudenten(Student& student, char& order) {
+    switch(order) {
+    case 'a':
+        std::sort();
+        break;
+
+    case'd':
+        std::sort();
+        break;
+
+    default:
+        std::cout << "Fehler bei der Eingabe. " << std::endl;
+        break;
+
+    }
+
 
 }
 
