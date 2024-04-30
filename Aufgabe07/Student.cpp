@@ -71,7 +71,9 @@ std::ostream& operator<<(std::ostream& os, const Student& student)
 {
     os << student.getName() << ", MatNr. " << student.getMatNr() << ", geb. am " 
        << student.getGeburtstag() << ", wohnhaft in " << student.getAdresse();
+    return os; // Return the ostream object after writing to it
 }
+
 
 const bool Student::operator==(const Student& student)
 {
@@ -96,3 +98,4 @@ const bool operator<(const Student& student1, const Student& student2)
     else
         return false;
 }
+

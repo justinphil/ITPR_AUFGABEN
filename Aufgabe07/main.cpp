@@ -9,15 +9,29 @@
 #include <string>
 #include <vector>
 #include <algorithm>
+#include <fstream>
 
 #include "Student.h"
 
-std::ostream outputFile("studenten.txt");
-/**
- * @brief Sortiert die Studenten nach der Matrikelnummer
- * 
- */
-void sortiereStudenten() {
+std::ofstream ofStream("Studenten.txt");
+std::ifstream ifStream;
+
+void sortiereStudenten(std::vector<Student>& studentenliste, const char& order) {
+    switch(order) {
+    case 'a':
+        std::sort(studentenliste.begin(), studentenliste.end());
+        break;
+
+    case'd':
+        std::sort(studentenliste.begin(), studentenliste.end(),  std::greater<Student>());
+        break;
+
+    default:
+        std::cout << "Fehler bei der Eingabe. " << std::endl;
+        break;
+
+    }
+
 
 }
 
@@ -34,18 +48,18 @@ void writeToFile(std::ostream& ausgabe, const Student& student) {
 * @param dateiName Name der Datei
 * @param studentenListe Vektor 
 */
-void saveToFile(const std::string dateiName, const std::vector<Student>& studentenListe) {
-    outputfile.open(dateiName);
-    if (!outputFile) {
+void saveToFile(const std::string& dateiName, const std::vector<Student>& studentenListe) {
+    ofStream.open(dateiName);
+    if (!ofStream) {
         std::cerr << "Fehler beim Öffnen der Datei '" << dateiName << "'." << std::endl;
         return;
     }
 
     for (const auto& student : studentenListe) {
-        writeToFile(outputFile, student);
+        std::cout << student << std::endl;
     }
 
-    outputFile.close();
+    ofStream.close();
     std::cout << "Daten erfolgreich in die Datei '" << dateiName << "' gespeichert." << std::endl;
 
 }
@@ -86,6 +100,7 @@ int main()
                   << "(6): Datenelement vorne hinzufuegen" << std::endl
                   << "(7): Daten aus einer Datei einlesen" << std::endl
                   << "(8): Daten in eine Datei sichern" << std::endl
+                  << "(9): Datenbank sortieren" << std::endl
                   << "(0): Beenden" << std::endl;
         std::cin >> abfrage;
         std::cin.ignore(10, '\n');
@@ -158,9 +173,9 @@ int main()
                 {
                     if (!studentenListe.empty())
                     {
-                        std::cout << "Inhalt der Liste in fortlaufender Reihenfolge:" << std::endl;
+                        std::cout << "Inhalt der Liste in ruecklaufender Reihenfolge:" << std::endl;
                         for (auto student = studentenListe.rbegin(); student != studentenListe.rend(); student++)
-                            std::cout << student;
+                            std::cout << *student;
                         
                     }
                     else
@@ -182,12 +197,16 @@ int main()
                     {
                         std::cout << "Lösche Datenelement mit der Matrikelnummer: " << matNr << std::endl;
                         
-                        auto student = std::find_if(studentenListe.begin(), studentenListe.end(), [matNr](const Student& s) { 
+                        auto student = std::find(studentenListe.begin(), studentenListe.end(), [&matNr](const Student& s) { 
                             return s.getMatNr() == matNr;
                         });
-
+                        std::cout << "Der zu loeschende Student ist: " << *student << std::endl;
+                        
                         studentenListe.erase(student);
-
+                        
+                        for(const auto &student : studentenListe) {
+                            std::cout << student;
+                        }
 
                     } else 
                     {
@@ -237,30 +256,30 @@ int main()
                         studentenListe.clear();
                     }
 
-                    std::cout << "Geben Sie den Namen der Datei ein (ohne Dateiendung): " << std::endl;
+                    std::cout << "Geben Sie den Namen der Datei ein (Mit Dateiendung): " << std::endl;
                     std::getline(std::cin, dateiName);
 
-                    std::fstream datei(dateiName + ".txt");
+                    ifStream.open(dateiName);
 
                     // Datei oeffnen
-                    if (datei.is_open()) {
+                    if (ifStream.is_open()) {
                         std::string line; // Linie in der Datei
-                        while (std::getline(datei, line)) { // Gehe durch die Datei solange es noch Linien gibt
+                        while (std::getline(ifStream, line)) { // Gehe durch die Datei solange es noch Linien gibt
                             if (!line.empty()) { // Wenn die Linie nicht leer ist
 
                                 matNr = std::stoul(line); // Matrikelnummer
-                                std::getline(datei, line); // Linie lesen
+                                std::getline(ifStream, line); // Linie lesen
                                 name = line; // Name
-                                std::getline(datei, line); // Naechste Linie lesen
+                                std::getline(ifStream, line); // Naechste Linie lesen
                                 geburtstag = line; // Geburtstag
-                                std::getline(datei, line); // Naechste Linie
+                                std::getline(ifStream, line); // Naechste Linie
                                 adresse = line; // Adresse
                                 
                                 Student student(matNr, name, geburtstag, adresse); // Student anlegen
                                 studentenListe.push_back(student); // Student in den Vector eingeben
                             }
                         }
-                        datei.close();
+                        ifStream.close();
                         std::cout << "Daten aus der Datei eingelesen." << std::endl;               
                     }
                     else 
@@ -279,9 +298,9 @@ int main()
                         std::cout << "Geben Sie den Namen der Datei ein (ohne Dateieindung): " << std::endl;
                         std::cin >> dateiName;
                             
-                        std::ifstream datei(dateiName + ".txt");
+                        ifStream.open(dateiName + ".txt");
 
-                            if (datei.good()) {
+                            if (ifStream.good()) {
                                 std::cout << "Die Datei '" << dateiName << ".txt' existiert bereits. Moechten Sie sie ueberschreiben? (j/n) ";
                                 std::cin >> overwrite;
 
@@ -295,6 +314,9 @@ int main()
                             else {
                                 saveToFile(dateiName + ".txt", studentenListe);                           
                             }
+
+                        ifStream.close();
+                        
                         }
 
                     else
@@ -302,6 +324,16 @@ int main()
 
                 }
                 break;
+            // Datenbank Sortieren
+            case '9':
+                {
+                    std::cout << "Wie soll die Datendank sortiert werden? (a, d)" << std::endl;
+                    char eingabe = std::cin.get();
+                    sortiereStudenten(studentenListe, tolower(eingabe));
+                    std::cout << "Datenbank wurde sortiert." << std::endl;
+                }
+                break;
+
 
             case '0':
                 std::cout << "Das Programm wird nun beendet";
