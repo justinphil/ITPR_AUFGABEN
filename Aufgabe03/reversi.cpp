@@ -92,9 +92,9 @@ void zeigeSpielfeld(const int spielfeld[GROESSE_Y][GROESSE_X])
                     break;
             }
             std::cout << "|";
-        };  //for i
+        };  //fuer i
         std::cout <<  std::endl;
-    }  //for j
+    }  //fuer j
 }
 
 /**
@@ -197,6 +197,7 @@ bool zugGueltig(const int spielfeld[GROESSE_Y][GROESSE_X], const int aktuellerSp
             if (spielfeld[i + posY][j + posX] != gegner)
                 continue;
 
+            // Pruefe ob es auf einem benachbarten Feld einen eigenen Stein gibt
             int loop = 2;
             while (loop <= 7) {
                 if (!aufSpielfeld(posX + loop * j, posY + loop * i))
@@ -289,6 +290,7 @@ int moeglicheZuege(const int spielfeld[GROESSE_Y][GROESSE_X], const int aktuelle
 
 bool menschlicherZug(int spielfeld[GROESSE_Y][GROESSE_X], const int aktuellerSpieler)
 {
+    // Checken ob ein Zug moeglich ist 
     if (moeglicheZuege(spielfeld, aktuellerSpieler) == 0)
     {
         return false;
@@ -297,6 +299,7 @@ bool menschlicherZug(int spielfeld[GROESSE_Y][GROESSE_X], const int aktuellerSpi
     int posX;
     int posY;
     std::string symbolSpieler;
+    // Setze das Symbol des Spielers je nachdem welcher Spieler gerade spielt
     if (aktuellerSpieler == 1)
     {
         symbolSpieler = "X";
@@ -311,12 +314,14 @@ bool menschlicherZug(int spielfeld[GROESSE_Y][GROESSE_X], const int aktuellerSpi
         std::string eingabe;
         std::cout << std::endl << "Du bist " << symbolSpieler << ". Dein Zug (z.B. A1, a1): " ;
         std::cin >> eingabe;
-        posX = (int) eingabe[0] % 32 -1;
+
+        // Konvertiere die Eingabe in eine Position auf dem Spielfeld
+        posX = (int) eingabe[0] % 32 - 1;
         posY = (int) eingabe[1] - 49;
 
         if (zugGueltig(spielfeld, aktuellerSpieler, posX, posY))
         {
-            //accept turn;
+            //Akzeptiere Zug
             break;
         }
         else
@@ -352,6 +357,7 @@ void spielen(const int spielerTyp[2])
         bool zugGemacht = false;
         std::cout << "Runden: " << runden++ << std::endl;
 
+        // Wenn der aktuelle Spieler keinen Zug moeglich hat, so setze er aus
         if (moeglicheZuege(spielfeld, aktuellerSpieler) == 0) {
             spielerHatAusgesetzt[aktuellerSpieler - 1] = true;
             std::cout << "Spieler " << aktuellerSpieler << " hat keine gueltigen Zuege mehr und setzt aus." << std::endl;
@@ -380,7 +386,7 @@ void spielen(const int spielerTyp[2])
             aktuellerSpieler = (aktuellerSpieler == 1) ? 2 : 1;
         }
 
-        // Beenden, wenn beide Spieler keine Züge mehr haben
+        // Beenden, wenn beide Spieler keine Zï¿½ge mehr haben
         if (spielerHatAusgesetzt[0] && spielerHatAusgesetzt[1])
         {
             break;
