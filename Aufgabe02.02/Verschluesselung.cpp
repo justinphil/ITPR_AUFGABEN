@@ -17,15 +17,15 @@ string verschluesseln(char schluessel[2][26], string wort)
 {	
 	string encWort = "";
 
-	// for-loop für jeden Charakter im String
+	// for-loop fuer jeden Charakter im String
 	for (char c : wort) {
 
 		// Abfrage ob der Char im Alphabet gegeben ist oder nicht.
-		// Wenn es gegeben ist, dann wird verschlüsselt, wenn nicht, dann bleibt der Char bestehen.
+		// Wenn es gegeben ist, dann wird verschlï¿½sselt, wenn nicht, dann bleibt der Char bestehen.
 		if (isalpha(c)) {
 			// Konvertierung des Char in einen int um zu indexen.
 			int index = toupper(c) - 'A';
-			// Unterscheidung ob Großbuchstaben oder Kleinbuchstaben verwendet werden sollen.
+			// Unterscheidung ob Grossbuchstaben oder Kleinbuchstaben verwendet werden sollen.
 			if (isupper(c))
 				encWort += schluessel[1][index];
 			else
@@ -40,7 +40,7 @@ string verschluesseln(char schluessel[2][26], string wort)
 	return encWort;
 }
 
-// Entschlüsselt den eingebenen String mittels des Schluessels.
+// Entschluesselt den eingebenen String mittels des Schluessels.
 string entschluesseln(char schluessel[2][26], string wort)
 {
 	string decWort = wort;
@@ -75,10 +75,10 @@ string entschluesseln(char schluessel[2][26], string wort)
 	return decWort;
 }
 
-// Platziert die Chars zufällig im Feld
+// Platziert die Chars zufaellig im Feld
 void shuffle(char arr[], int size) {
 	
-	// Gleicher Seed für die Laufzeit des Programms für Random Zahlen.
+	// Gleicher Seed fuer die Laufzeit des Programms fuer Random Zahlen.
 	srand(time(0));
 	
 	// for-Loop die durch jeden char im Feld iteriert und diese tauscht.
@@ -96,17 +96,17 @@ int main()
 	char schluessel[2][26];
 	string wort = "";
 
-	// Füllen der beiden Reihen, des Feldes schluessel, mit Klein-/Großbuchstaben.
+	// Fï¿½llen der beiden Reihen, des Feldes schluessel, mit Klein-/Groï¿½buchstaben.
 	for (int i = 0; i < 26; i++) {
 		schluessel[0][i] = (char)(i + 97);
 		schluessel[1][i] = (char)(i + 65);
 	}
 
-	// Zufällige platzierung der Chars im Char-Feld.
+	// Zufaellige platzierung der Chars im Char-Feld.
 	shuffle(schluessel[0], 26);
 	shuffle(schluessel[1], 26);
 	
-	// Ausgabe des Feldes schlüssel.
+	// Ausgabe des Feldes schluessel.
 	for (int i = 0; i < 26; i++)
 		cout << "(" << (char)(i + 65) << ")" << schluessel[1][i] << schluessel[0][i] << " ";
 	cout << endl;

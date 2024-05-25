@@ -11,6 +11,7 @@
 
 using namespace std;
 
+// Struktordefiniton von Person
 struct Person {
 
     string sVorname;
@@ -21,11 +22,12 @@ struct Person {
 
 int main()
 {
+    // Deklaration von mehreren Personen
     Person nBenutzer;
     Person nKopieGesamt;
     Person nKopieEinzeln;
 
-    // Eingabe der 
+    // Eingabe der Informationen in nBenutzer
     cout << "Geben Sie ihren Vornamen ein: " << endl;
     cin >> nBenutzer.sVorname;
     cout << "Geben Sie ihren Nachnamen ein: " << endl;

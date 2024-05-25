@@ -13,7 +13,9 @@
 using namespace std;
 
 
-//
+/* Berechnung der Position im Alphabet
+*  Da GroÃŸ A in der ASCII Zeichenkette 65 steht, wird die Position im Alphabet berechnet
+*/ 
 int berechnungPositionImAlphabet(int pInt) {
     int calc = pInt - 64;
     return calc;
@@ -26,7 +28,7 @@ int main()
         // Konstanter Integer iZweite
         const int iZweite = 1;
 
-        // iFeldSize ist eine Konstante Zahl, die die Größe des Feldes iFeld bestimmt.
+        // iFeldSize ist eine Konstante Zahl, die die Grï¿½ï¿½e des Feldes iFeld bestimmt.
         const int iFeldSize = 2;
         int iFeld[iFeldSize] = {};
 
@@ -104,11 +106,11 @@ int main()
     dSummeCast = (double)iErste + (double)iZweite;
     dQuotientCast = (double)iErste / (double)iZweite;
 
-    // Zusammenführung von Strings
+    // Zusammenfuehrung von Strings
     sVornameName = sVorname + ", " + sNachname;
     sNameVorname = sNachname + ", " + sVorname;
 
-    // Konvertierung zu Großbuchstaben, damit man weniger Arbeit hat.
+    // Konvertierung zu Grossbuchstaben, damit man weniger Arbeit hat.
     iName1 = toupper(sVorname[0]);    
     iName2 = toupper(sVorname[1]);
 
