@@ -21,7 +21,7 @@ string verschluesseln(char schluessel[2][26], string wort)
 	for (char c : wort) {
 
 		// Abfrage ob der Char im Alphabet gegeben ist oder nicht.
-		// Wenn es gegeben ist, dann wird verschl�sselt, wenn nicht, dann bleibt der Char bestehen.
+		// Wenn es gegeben ist, dann wird verschluesselt, wenn nicht, dann bleibt der Char bestehen.
 		if (isalpha(c)) {
 			// Konvertierung des Char in einen int um zu indexen.
 			int index = toupper(c) - 'A';
@@ -32,6 +32,7 @@ string verschluesseln(char schluessel[2][26], string wort)
 				encWort += schluessel[0][index];
 		}
 		else {
+			// Wenn es kein Buchstabe ist, dann wird der Char unveraendert gespeichert.
 			encWort += c;
 		}
 			
@@ -96,7 +97,7 @@ int main()
 	char schluessel[2][26];
 	string wort = "";
 
-	// F�llen der beiden Reihen, des Feldes schluessel, mit Klein-/Gro�buchstaben.
+	// Fuellen der beiden Reihen, des Feldes schluessel, mit Klein-/Gro�buchstaben.
 	for (int i = 0; i < 26; i++) {
 		schluessel[0][i] = (char)(i + 97);
 		schluessel[1][i] = (char)(i + 65);
