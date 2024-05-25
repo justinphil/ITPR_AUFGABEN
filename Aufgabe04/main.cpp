@@ -12,7 +12,7 @@ const double ERDRADIUS = 6371.0; // Erdradius in Kilometern
 const double AUGENHOEHE = 1.7; // Augenhoehe in Metern
 const double PLATTFORMHOEHE = 555.7; // Plattformhoehe in Metern
 
-const double PI = 3.14159265;
+const double PI = 3.14159265; // Konstante PI
 
 int main()
 {
