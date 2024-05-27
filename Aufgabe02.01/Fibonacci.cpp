@@ -9,7 +9,7 @@
 #include <iostream>
 
 // Zahl bis zu welcher die Fibonacci Sequenz berechnet werden soll.
-int iNumberRec = 47, iNumberIterative = 47;
+int iNumberRec = 42, iNumberIterative = 42;
 
 
 // Berechnung der Fibonacci Zahl, mittels Rekursion
@@ -32,7 +32,7 @@ int fibIterative(int n) {
     if (n == 0)
         return 0;
     else if (n == 1)
-        return currentFib;
+        return 1;
 
     for (int i = 1; i <= n; i++) {
         newFib = prevFib + currentFib;
@@ -48,12 +48,15 @@ int main ()
     std::cout << " (Rekursiv) Fibonacci - Zahlen von 0 bis " << iNumberRec << ":" << std::endl ;
     for (int i = 0; i <= iNumberRec ; i ++)
     {
-        std::cout << "f(" << i << ") = " << fibonacciRec(i) << std::endl ;
+        std::cout << "f(" << i << ") = " << fibonacciRec(i) << std::endl;
     }
+
     // Ausgabe der Fibonacci Zahlen mittels Iteration
     std::cout << "(Iterativ) Fibonacci - Zahlen von 0 bis " << iNumberIterative << ":" << std::endl;
-    std::cout << fibIterative(iNumberIterative) << std::endl;
-
+    for(int i = 0; i <= iNumberIterative; i++) 
+    {
+        std::cout << "f("<< i << ") = " << fibIterative(i) << std::endl;
+    }
 
     return 0;
 }
