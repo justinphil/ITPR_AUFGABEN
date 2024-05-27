@@ -41,40 +41,45 @@ string verschluesseln(char schluessel[2][26], string wort)
 	return encWort;
 }
 
-// Entschluesselt den eingebenen String mittels des Schluessels.
-string entschluesseln(char schluessel[2][26], string wort)
-{
-	string decWort = wort;
+// Entschluesselt den eingegebenen String mittels des Schluessels.
+string entschluesseln(char schluessel[2][26], string wort) {
+    string decWort = "";
 
-	// Solange es Chars im String gibt
-	for (char c : decWort) {
-		
-		// Ist es ein Buchstabe
-		if (isalpha(c)) {
+    // for-loop fuer jeden Charakter im String
+    for (char c : wort) {
+        if (isalpha(c)) {
+            // Konvertierung des Char in einen int um zu indexen.
+            int index = -1;
 
-			char encChar = toupper(c);
-			char offset = isupper(c) ? 'A' : 'a';
-			int index = 0;
+            // Unterscheidung ob Grossbuchstaben oder Kleinbuchstaben verwendet werden.
+            if (isupper(c)) {
+                // Suche den verschlüsselten Großbuchstaben im Schluesselarray
+                for (int i = 0; i < 26; i++) {
+                    if (schluessel[1][i] == c) {
+                        index = i;
+                        break;
+                    }
+                }
+                decWort += (char)(index + 'A');
+            } else {
+                // Suche den verschlüsselten Kleinbuchstaben im Schluesselarray
+                for (int i = 0; i < 26; i++) {
+                    if (schluessel[0][i] == c) {
+                        index = i;
+                        break;
+                    }
+                }
+                decWort += (char)(index + 'a');
+            }
+        } else {
+            // Wenn es kein Buchstabe ist, dann wird der Char unveraendert gespeichert.
+            decWort += c;
+        }
+    }
 
-			// Suche nach Position des Chars im Schluessel
-			for (int i = 0; i < 26; i++) {
-
-				if (schluessel[1][i] == encChar) {
-					index = i;
-					break;
-				}
-			}
-
-			// Setze entschluesselten Char
-			c = offset + index;
-
-		}
-		else
-			decWort += c;
-	}
-
-	return decWort;
+    return decWort;
 }
+
 
 // Platziert die Chars zufaellig im Feld
 void shuffle(char arr[], int size) {
