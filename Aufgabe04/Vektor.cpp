@@ -1,7 +1,7 @@
 //////////////////////////////////////////////////////////////////////////////
 // Praktikum Informatik 1 
 // 
-// Versuch 04: Einführung Klasse
+// Versuch 04: Einfï¿½hrung Klasse
 //
 // Datei:  Vektor.cpp
 // Inhalt: Sourcedatei der Klasse Vektor
@@ -51,8 +51,8 @@ double Vektor::skalarProd(const Vektor& input) const {
 * @brief Function returns the angle of the vector int relation to another
 */
 double Vektor::winkel(const Vektor& input) const {
-    double cosine = (this->skalarProd(input)) / (this->laenge() * input.laenge());
-    double winkel = acos(cosine) * 180/pi; // Umrechnung in Grad 
+    double cosinus = (this->skalarProd(input)) / (this->laenge() * input.laenge());
+    double winkel = acos(cosinus) * 180/pi; // Umrechnung in Grad 
     return winkel; 
 }
 

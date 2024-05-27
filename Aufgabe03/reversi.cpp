@@ -445,10 +445,11 @@ int main()
 	    //
 	    // Hier erfolgt jetzt Ihre Implementierung ...
 
-		std::cout << "" << std::endl;
+		//std::cout << "" << std::endl;
 		char eingabe;
 
 		std::cout << "Ist Spieler 1 ein Computer ? (j/n) " << std::endl;
+        
 		std::cin >> eingabe;
 		if (tolower(eingabe) == 'j')
 			spielerTyp[0] = COMPUTER;

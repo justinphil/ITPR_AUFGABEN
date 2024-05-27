@@ -111,6 +111,7 @@ void Liste::deleteElement(int pMatNum)
 {
     ListenElement* cursor = front;
     ListenElement* prev = nullptr;
+    ListenElement* next = nullptr;
     // Wenn die Liste leer ist, wird nichts geloescht
     if(front == nullptr)
         return; 
@@ -119,6 +120,7 @@ void Liste::deleteElement(int pMatNum)
     while (cursor!= nullptr) {
         if (cursor->getData().getMatNr() == pMatNum) {
             prev->setNext(cursor->getNext()); // Das naechste Element wird auf das vorherige Element gesetzt
+            next->setPrev(cursor->getPrev());
             delete cursor; // Das Element wird geloescht
             return; 
         }

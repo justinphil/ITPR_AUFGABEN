@@ -29,7 +29,7 @@ int main()
         sicht = erde.sub(beobachter); // Berechnung der Sichtweite
         iterationen++;
 
-    } while (erde.skalarProd(sicht) >= 0); // Solange bis die Vektoren orthogonal zueinander sind.
+    } while (erde.skalarProd(sicht) <= 0); // Solange bis die Vektoren orthogonal zueinander sind.
     
     double beta = beobachter.winkel(erde);
 
